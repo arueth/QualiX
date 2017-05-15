@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  guacd:
+    image: guacamole/guacd:0.9.10-incubating
+    networks:
+      - guacamole
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  qualix:
+    image: arueth/qualix:latest
+    environment:
+      - GUACAMOLE_HOME=/opt/guacamole/.guacamole
+      - GUACD_HOSTNAME=guacd
+      - GUACD_PORT=4822
+    ports:
+      - 8080:8080
+    networks:
+      - guacamole
+    depends_on:
+      - guacd
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  guacamole:
+
