@@ -16,7 +16,8 @@ services:
       - GUACD_HOSTNAME=guacd
       - GUACD_PORT=4822
     ports:
-      - 8080:8080
+      - 80:8080
+      - 443:8443
     networks:
       - guacamole
     depends_on:
